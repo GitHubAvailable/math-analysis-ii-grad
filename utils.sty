@@ -1,0 +1,32 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{utils}[2024/09/03 v1.0 by GitHubAvailable]
+
+% -------- Package Inclusion --------
+% Package Management
+\RequirePackage{import}
+\RequirePackage[subpreambles=true]{standalone} % enable each part to be compiled separately
+
+% Text Effects
+\RequirePackage{hyperref}
+
+% Math Symbol Libraries
+\RequirePackage{amsmath, amssymb, amsthm} % AMS libs
+\RequirePackage{dsfont} % for mathbb font
+
+% Images
+\RequirePackage{graphicx} % for include graphics
+\RequirePackage{float}
+\RequirePackage{subfigure} % needed even for subcaption package
+\RequirePackage{subcaption}
+
+% -------- Utility Definitions --------
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\ch}{\text{ch}}
+\newcommand{\vspan}{\text{span}\,}
+\newcommand{\ind}{\text{ind}\,}
+\newcommand{\adj}{\text{adj}\,}
