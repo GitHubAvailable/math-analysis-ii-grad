@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass[openany]{book}
 \usepackage[
     nomarginpar  % no margin paragraphs
 ]{geometry}
@@ -8,13 +8,18 @@
 \title{Real Analysis Presentation}
 \author{GitHubAvailable}
 
-% Intiate Header & Footers
-\pagestyle{fancy}
-\fancyhead[RO, LE]{\thepage}
-
 \begin{document}
 
 % \maketitle
+
+\frontmatter  % use front content number (roman)
+
+{
+    \hypersetup{linkcolor=blue}
+    \tableofcontents
+}
+
+\mainmatter  % Use main content number (arabic)
 
 \chapter{Lebesgue Measure Theory}
 \import{chapters/}{ch1}

@@ -1,8 +1,39 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{hdr}[2025/01/22 v1.0 by GitHubAvailable]
 
+
 % -------- Package Inclusion --------
 % Package Management
 \RequirePackage{fancyhdr}
+\RequirePackage{titlesec}  % may have compatibility issue with hyperref
 
 % Custom Header & Footer Style
+\pagestyle{fancy}
+\fancyhead[RO, LE]{\thepage}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\rightmark}
+
+
+% -------- Page Settings --------
+% Remove extra page caused by mainmatter
+\renewcommand{\mainmatter}{
+    \clearpage  % default is clear double page
+    \@mainmattertrue
+    \pagenumbering{arabic}
+}
+
+
+% -------- Chapter & Section Settings --------
+% \titleformat{\chapter}
+% {\bfseries}  % title format
+% {\thechapter}  % label
+% {0.5ex}
+% {
+%     \noindent \\
+%     \rule{\textwidth}{0.5pt}
+%     \rule{0.2\textwidth}{3pt} \\
+% }  % before-code
+% [
+%     \rule{0.2\textwidth}{0.5pt}
+% ]  % after-code
+% \titleformat{\section}{}{}{}{}
