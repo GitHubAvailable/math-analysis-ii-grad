@@ -5,5 +5,229 @@
 
 \begin{document}
     \section{General Measures, Outer Measures, Carath\'{e}odory Theorem}
+        \subsection{General Measure}
+        \begin{definition}[Measure]
+            Let $(X, \mathscr{M})$ be a measurable space ($\mathscr{M}$ is a $\sigma$-algebra of $X$). A set function $\mu : \mathscr{M} \rightarrow [0, +\infty]$ if it satsifies:
+            \begin{enumerate}
+                \item $\mu(\emptyset) = 0$.
+                \item ($\sigma$-additivity, countable additivity) for any sequence of mutually disjoint sequence $E_i \in \mathscr{M}$, there is
+                \begin{equation*}
+                    \mu\left(\bigcup^{\infty}_{i = 1} E_i\right) = \sum^{\infty}_{i = 1} \mu(E_i).
+                \end{equation*}
+            \end{enumerate}
+        \end{definition}
+        \begin{remark}
+            $\mu$ is called finite measure if $\mu(X) < \infty$, probability measure if $\mu(X) = 1$.
+        \end{remark}
+
+        \begin{definition}[Measure Space]
+            If $\mu$ is a measure in measurable space $(X, \mathscr{M})$, then $(X, \mathscr{M}, \mu)$ is called a measure space.
+        \end{definition}
+        \begin{remark}
+            Probability space if $\mu(X) = 1$.
+        \end{remark}
+
+        \noexpand Let $(X, \mathscr{M}, \mu)$ be a measure space.
+        \begin{theorem}[Finite additivity]
+            If $E_1, E_2, \dots, E_n \in \mathscr{M}$ were disjoint, then $\mu\left(\bigcup^{\infty}_{i = 1} E_i\right) = \sum^{\infty}_{i = 1} \mu(E_i)$.
+        \end{theorem}
+        
+        \begin{theorem}[Monotonicity]
+            If $E_1 \subseteq E_2$, then $\mu(E_1) \leq \mu(E_2)$.
+        \end{theorem}
+        
+        \begin{theorem}[Sub-additivity]
+            For $E_1, E_2, \dots, E_n \in \mathscr{M}$, $\mu\left(\bigcup^{\infty}_{i = 1} E_i\right) \leq \sum^{\infty}_{i = 1} \mu(E_i)$.
+        \end{theorem}
+
+        \begin{theorem}[Continuity from Below]
+            If $E_1 \subseteq E_2 \subseteq \cdots$, then $\mu\left(\bigcup^{\infty}_{i = 1} E_i\right) = \lim_{i \rightarrow \infty} \mu(E_i)$.
+        \end{theorem}
+
+        \begin{theorem}[Continuity from Above]
+            If $E_1 \subseteq E_2 \subseteq \cdots$ and $\mu(E_1) < \infty$, then $\mu\left(\bigcap^{\infty}_{i = 1} E_i\right) = \lim_{i \rightarrow \infty} \mu(E_i)$.
+        \end{theorem}
+
+        \begin{theorem}[Lower Continuity]
+            $\mu\left(\varliminf_{i \rightarrow \infty} E_i\right) \leq \varliminf_{i \rightarrow \infty} \mu\left(E_i\right)$
+        \end{theorem}
+
+        \begin{theorem}[Upper Continuity]
+            If $\mu\left(\bigcup^{\infty}_{i = 1} E_i\right) < \infty$, then $\mu\left(\varlimsup_{i \rightarrow \infty} E_i\right) \geq \varlimsup_{i \rightarrow \infty} \mu\left(E_i\right)$.
+        \end{theorem}
+
+        \begin{theorem}
+            If $\lim_{i \rightarrow \infty} E_i$ exists and $\mu\left(\bigcup^{\infty}_{i = 1} E_i\right) < \infty$, then $\mu\left(\lim_{i \rightarrow \infty} E_i\right) = \lim_{i \rightarrow \infty} \mu\left(E_i\right)$.
+        \end{theorem}
+
+        \begin{theorem}[Subtraction]
+            If $E \subseteq F$ and $\mu(E) < \infty$, then $\mu(F \backslash E) = \mu(F) - \mu(E)$.
+        \end{theorem}
+
+        \begin{theorem}[The Borel-Cantelli Lemma]
+            If $\sum^{\infty}_{i = 1} \mu(E_i) < \infty$, then $\mu\left(\varlimsup_{i \rightarrow \infty} E_i\right) = 0$, that is, the set of elements that belongs to infinitely many $E_i$ has measure zero.
+        \end{theorem}
+
+        \begin{definition}[Finite Measure]
+            A measure $\mu$ in a measurable space $(X, \mathscr{M})$ is called finite if $\mu(X) < \infty$.
+        \end{definition}
+        \begin{remark}
+            Probability and discrete measures is finite; the Lebesgue measure is not finite
+        \end{remark}
+
+        \begin{definition}[$\sigma$-Finite]
+            A measure $\mu$ in a measurable space $(X, \mathscr{M})$ is called finite if
+            \begin{equation*}
+                X = \bigcup^{\infty}_{i = 1} X_i, \mu(X_i) < \infty.
+            \end{equation*}
+        \end{definition}
+        \begin{remark}
+            Lebesgue measure is $\sigma$-finite.
+        \end{remark}
+
+        \begin{definition}[Restriction]
+            Let $(X, \mathscr{M}, \mu)$ be a measure space and $A \in \mathscr{M}$. Define function $\mu_A$ in $(X, \mathscr{M})$ by
+            \begin{equation*}
+                \mu_A(E) = \mu(E \cap A).
+            \end{equation*}
+            Then $\mu_A$ is a measure in $(X, \mathscr{M})$, $\mu_A : \mathscr{M} \rightarrow [0, +\infty]$. Note that $\mu_A(E \cap A^C) = 0$. $(A, M|_A, \mu_A)$ forms a measure space, where $M|_A = \{E \cap A : E \in \mathscr{M}\}$.
+        \end{definition}
+
+        \begin{definition}[Complete Measure Space]
+            A measure space $(X, \mathscr{M}, \mu)$ is complete if any subset of a set of measure $0$ is also measurable.
+        \end{definition}
+        \begin{remark}
+            Lebesgue measure space is complete. Borel measure space is not.
+        \end{remark}
+
+        \begin{theorem}
+            Let $(X, \mathscr{M}, \mu)$ be a measure space, and
+            \begin{equation*}
+                \mathscr{N} = \{N \in M : \mu(N) = 0\}, \quad \bar{M} = \{E \cup F : E \in M, F \subseteq N, \exists N \in \mathscr{N}\}.
+            \end{equation*}
+            Then $\bar{M}$ is a $\sigma$-algebra, there is a unique extension $\bar{\mu}$ of $\mu$ to a complete measrue on $\bar{\mathscr{M}}$. \\
+            $\bar{\mu}$ is the completion of $\mu$. It is defined by $\bar{\mu}(E \cup F) = \mu(E)$ for $E \cup F \in \bar{\mathscr{M}}$ and $F \subseteq N \in \mathscr{N}$.
+        \end{theorem}
+
+        \subsection{Outer Measure and its Construction}
+        \begin{definition}[Outer Measure]
+            Let $X \neq \emptyset$. A set function $\mu^* : \mathscr{P}(X) \rightarrow [0, \infty]$ is called an outer measure if
+            \begin{itemize}
+                \item $\mu^*(\mathscr{P}) = \emptyset$;
+                \item $\mu^*(A) \leq \mu^*(B)$ when $A \subseteq B$ (monotonicity);
+                \item $\mu^*(\bigcup^{\infty}_{i = 1} A_i) \leq \sum^{\infty}_{i = 1} \mu^*(A_i)$ when $A_i \in \mu^*(\mathscr{P}(X))$ (subadditivity).
+            \end{itemize}
+        \end{definition}
+        \begin{remark}
+            Outer measure is defined on the power set.
+        \end{remark}
+
+        \begin{theorem}
+            Let $\mathscr{E}$ be a family of subsets of $X$ including $\emptyset$ and $X$. Let $\rho : \mathscr{E} \rightarrow [0, \infty]$ be a set function such that $\rho(\emptyset) = 0$. For any $E \in \mathscr{E}$ define the set function $\mu^* : \mathscr{P}(X) : \mathscr{E} \rightarrow [0, \infty]$ by
+            \begin{equation*}
+                \mu^*(E) = \inf\left\{\sum^{\infty}_{i = 1} \rho(E_i) : E \subseteq \bigcup^{\infty}_{i = 1} E_i, E_i \in \mathscr{E}\right\}.
+            \end{equation*}
+            Then $\mu^*$ is an outer measure.
+        \end{theorem}
+
+        \begin{definition}[Metric Outer Measure]
+            Outer measure $\mu^*$ is called an metric outre measure if for any sets $E, F$ with $d(E, F) := \inf\{d(x, y) : x \in E, y \in E\} > 0$ it always have $\mu^*(E \cup F) = \mu^*(E) + \mu^*(F)$.
+        \end{definition}
+
+        \subsection{Carath\'eodory's Theorem}
+        \begin{theorem}[$\mu^*$-Measurable]
+            Let $\mu^*$ be the outer measure in $X$. A subset $E \subseteq X$ is called $\mu^*$-measurable if
+            \begin{equation*}
+                \mu^*(A) = \mu^*(A \cap E) + \mu^*(A \cap E^C), \quad\text{for any}\; A \subseteq X.
+            \end{equation*}
+        \end{theorem}
+
+        \begin{remark}
+            By subadditivity, it is always true that $\mu^*(A) \leq \mu^*(A \cap E) + \mu^*(A \cap E^C)$. So $E$ is measurable if and only if $\mu^*(A) \geq \mu^*(A \cap E) + \mu^*(A \cap E^C)$.
+        \end{remark}
+
+        \begin{theorem}
+            $\mu^*$ is finitely additive on $\mu^*$-measurable sets.
+        \end{theorem}
+
+        \begin{theorem}[Carath\'eodory Theorem]
+            Let $\mu^*$ be an outer measure in $X$ and let $\mathscr{M}$ be the family of $\mu^*$-measurable sets. Then $\mathscr{M}$ is a $\sigma$-algebra and the restriction of $\mu^*$ to $\mathscr{M}$ is a complete measure.
+        \end{theorem}
+        
+        \subsection{Presentation Question}
+        \begin{question}
+            Show that $p$-dim Hausdorff outer measure then $H_p$ is a metric outer measure.
+        \end{question}
+        \begin{proof}
+            Let $S_A := \bigcup^{\infty}_{i = 1} A_i, S_B := \bigcup^{\infty}_{i = 1} B_i$ be the union covers of sets $A, B \subseteq X$, respectively. Suppose $d(A, B) > 0$. Let $S_{A \cup B} := \bigcup^{\infty}_{i = 1} C_i$ be a cover of $A \cup B$. Without loss of generality, assume each $C_i \cap (A \cup B) \neq \emptyset$. Notice that when $\delta < \frac{1}{3} d(A, B)$, for any $i \in \Z^+$, at least one of $C_i \cap A$ and $C_i \cap B$ must be empty. So $\{C_i\}$ can be partitioned into $2$ disjoint covers such that $A \subseteq \bigcup^{\infty}_{j = 1} C_{i_j}$ and $B \subseteq \bigcup^{\infty}_{k = 1} C_{i_k}$, that is,
+            \begin{align*}
+                \mu^*(A \cap B) &= \mu^*(A) + \mu^*(B) \\
+                H^p_{\delta}(A \cap B) &= H^p_{\delta}(A) + H^p_{\delta}(B) \\
+                \lim_{\delta \rightarrow 0} H^p_{\delta}(A \cap B) &= \lim_{\delta \rightarrow 0} H^p_{\delta}(A) + \lim_{\delta \rightarrow 0} H^p_{\delta}(B) \\
+                H^p(A \cap B) &= H^p(A) + H^p(B).
+            \end{align*}
+            So $H^p$ is a metric outer measure.
+        \end{proof}
+
+
+    \section{Premeasure, Lebesgue-Stieltjes and Push-Forward Measures}
+        \subsection{Premeasure}
+        \begin{definition}[Premeasure]
+            Let $\mathscr{A}$ be an algebra of $X$. A set function $\mu_0 : \mathscr{A} \rightarrow [0, \infty]$ is a premeasure if it satisfies:
+            \begin{enumerate}
+                \item $\mu_0(\emptyset) = 0$;
+                \item $\mu_0\left(\bigcup^{\infty}_{i = 1} A_i\right) = \sum^{\infty}_{i = 1} \mu_0(A_i)$ for disjoint $A_i \in \mathscr{A}$ so that $\bigcup^{\infty}_{i = 1} A_i \in \mathscr{A}$.
+            \end{enumerate}
+        \end{definition}
+
+        \begin{theorem}
+            A premeasure is finitely additive and monotone.
+        \end{theorem}
+
+        \begin{theorem}
+            Let $\mu_0$ be a measrue on an algebra $\mathscr{A}$. Then for any $A \in \mathscr{A}$, $A$ is $\mu_0$ measurable, i.e., $A \in \mathscr{M}$, and $\mu^*_0(A) = \mu_0(A)$.
+        \end{theorem}
+
+        \begin{theorem}[Carath\'eodory Extension Theorem]
+            Let $\mathscr{A}$ be an algebra of $X$, $\sigma(\mathscr{A})$ be a $\sigma$-algebra generated by $\mathscr{A}$, and $\mu_0$ be a premeasure on $\mathscr{A}$. Then there exists a measure $\mu$ on $\sigma(\mathscr{A})$ such that
+            \begin{equation*}
+                \mu = \mu^*_0 |_{\sigma(\mathscr{A}}, \quad \mu(A) = \mu_0(A), \quad A \in \mathscr{A}.
+            \end{equation*}
+            If $\mu^*_0$ is $\sigma$-finite, then $\mu(\mathscr{A}) \rightarrow [0, \infty]$ is the unique extension of $\mu_0 : \mathscr{A} \rightarrow [0, \infty]$ to $\sigma(\mathscr{A})$.
+        \end{theorem}
+        
+        \subsection{Lebesgue-Stieltjes and Push-Forward Measures}
+        \begin{theorem}
+            Let $F : \R \rightarrow \R$ be an increasing and right continuous function. For a disjoint union $\bigcup^{\infty}_{i = 1} (a_i, b_i]$, define set function $\mu_0 : \mathscr{A} \rightarrow [0, \infty]$ by
+            \begin{equation*}
+                \mu_0\left(\bigcup^{\infty}_{i = 1} (a_i, b_i]\right) = \sum^{\infty}_{i = 1} (F(b_i) - F(a_i)).
+            \end{equation*}
+            Then $\mu^*_0$ is a premeasure on $\mathscr{A}$.
+        \end{theorem}
+
+        \begin{definition}[Lebesgue-Stieltjes Measure]
+            The premeasure defined above has an extension $\mu_F : \mathscr{M}_F \rightarrow [0, \infty]$, where $\mathscr{M}_F$ is the family of $\mu_F$-measurable sets. $\mu_F$ is called Lebesgue-Stieltjes measure.
+        \end{definition}
+        
+        \begin{remark}
+            There is a similar construction for intervals of the form $[a, b)$ and a left continuous function $F$.
+        \end{remark}
+
+        \begin{theorem}
+            If $\mu$ is a finite Borel measure in $\R$, let $F(x) = \mu((-\infty, x])$, then $\mu = m_F$. $F$ is called cumulative distribution function.
+        \end{theorem}
+
+        \begin{theorem}
+            The completion of the Borel measure $m_F$ is the restriction of the measure $\mu^*_0$ to the $\mu^*_0$ measurable sets. It is called Lebesgue-Stieltjes Measure, denoted by $m_F$.
+        \end{theorem}
+
+        \begin{definition}[Push-forward Measure]
+            Let $(X, \mathscr{M})$ and $(Y, \mathscr{N})$ be measurable spaces and $f : X \rightarrow Y$ be a measurable function. If $\mu$ is a measure in $(X, \mathscr{M})$, one can define a measure $\nu$ in $(Y, \mathscr{N})$ by
+            \begin{equation*}
+                \nu(B) = \mu(f^{-1}(B)), \quad B \in \mathscr{N}.
+            \end{equation*}
+            It is easily verified that $\nu$ is a measure in $(Y, \mathscr{N})$. $\nu$ is the push-forward measure of $\mu$, denoted $f_*\mu$.
+        \end{definition}
+        
         \subsection{Presentation Question}
 \end{document}
