@@ -318,7 +318,7 @@
         The complement of an closed set is open, and vice versa.
     \end{theoremIndep}
     \begin{proof}
-        Suppose Statement 1 is true. Since $E$ is arbitrary, for $E^C$, there exists open set $F^C$ with $E^C \subseteq F^C$ such that $m^*(F^C \backslash E^C) < \varepsilon$. By definition of complement, $x \in F^C \backslash E^C$ if and only if $x \in E \backslash F$. It follows that $E \backslash F = F^C \backslash E^C$. Notice that $F$ is closed since $F^C$ is open. So there exists closed set $F \subseteq E$ such that $m^*(E \backslash F) = m^*(F^C \backslash E^C) < \varepsilon$ for any $\varepsilon > 0$, thus proving Statement 2. \\
+        Suppose Statement 1 is true. Since $E$ is arbitrary, for $E^C$, there exists open set $F^C$ with $E^C \subseteq F^C$ such that $m^*(F^C \backslash E^C) < \varepsilon$. By definition of complement, $x \in F^C \backslash E^C$ if and only if $x \in E \backslash F$. It follows that $E \backslash F = F^C \backslash E^C$. Notice that $F$ is closed since $F^C$ is open. So there exists closed set $F \subseteq E$ such that $m^*(E \backslash F) = m^*(F^C \backslash E^C) < \varepsilon$ for any $\varepsilon > 0$, thus proving Statement 2. By similar logic, Statement 1 can be proved by Statement 1. So they are equivalent\\
 
         \noindent By Statement 1 and Statement 2, for any $\varepsilon > 0$, there exists a closed set $F$ and open set $O$ with $F \subseteq E \subseteq O$ such that $m^*(O \backslash E) < \frac{\varepsilon}{2}$ and $m^*(E \backslash F) < \frac{\varepsilon}{2}$. By subadditivity,
         \begin{equation*}
