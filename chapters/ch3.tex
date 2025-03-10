@@ -1,0 +1,139 @@
+\documentclass[class=book, crop=false]{standalone}
+\usepackage{xcolor}
+\usepackage{utils}
+\usepackage{import}
+
+\begin{document}
+    \section{Measurable Functions}
+        \subsection{Measurable Functions}
+        \begin{definition}[Measurable Functions]
+            Let $(X, \mathcal{M}), (Y, \mathcal{N})$ be measurable spaces. $f : X \rightarrow Y$ is measurable if $f^{-1}(F) \in \mathscr{M}$ for any $F \in \mathcal{N}$.
+        \end{definition}
+
+        \begin{theorem}
+            $f$ is measurable if and only if any of the following is true:
+            \begin{enumerate}
+                \item $f^{-1}([a, \infty)) \in \mathcal{M}$ for any $a \in \R$;
+                \item $f^{-1}((-\infty, a)) \in \mathcal{M}$ for any $a \in \R$;
+                \item $f^{-1}((a, b)) \in \mathcal{M}$ for any $a, b \in \R$;
+                \item $f^{-1}([a, b]) \in \mathcal{M}$ for any $a, b \in \R$;
+                \item $f^{-1}(B) \in \mathcal{M}$, for any Borel set $B \subseteq \R$.
+            \end{enumerate}
+        \end{theorem}
+        \begin{remark}
+            For the first two, open or close on the finite side does not matter.
+        \end{remark}
+        \begin{remark}
+            If the image of $f$ is $\overline{\R}$ (i.e., $[-\infty, +\infty]$), $f^{-1}(\{-\infty\}, f^{-1}(\{+\infty\})$ needs to fall within $\mathcal{M}$.
+        \end{remark}
+
+        \begin{theorem}
+            $f : E \rightarrow [-\infty, +\infty]$ is measurable if $f^{-1}((a, +\infty])$ is measurable for any $a \in \R$.
+        \end{theorem}
+
+        \begin{theorem}
+            Continuous functions and monotone functions are measurable.
+        \end{theorem}
+        \begin{corollary}
+            If $f$ is measurable, $f^{-1}$ is measurable.
+        \end{corollary}
+
+        \begin{theorem}
+            The indicator function is measurable if and only if the set $E$ is measurable.
+        \end{theorem}
+
+        \begin{theorem}
+            If $f : E \rightarrow \R$ is measurable, then $\delta|_{E_0}$ is measurable when $E_0 \subseteq E$ is measurable.
+        \end{theorem}
+
+        \begin{theorem}
+            Let $E = E_1 \cup E_2$. Suppose $E_1$ and $E_2$ are measurable. Then $f : E \rightarrow \R$ is measurable if and only if $f|_{E_1}$ and $f|_{E_2}$ are measurable.
+        \end{theorem}
+
+        \begin{theorem}
+            If $f, g$ are measurable, $af + bg$, $f \cdot g$ and $\frac{f}{g} \; (g \neq 0)$ are measurable.
+        \end{theorem}
+
+        \begin{theorem}
+            If $g : E \rightarrow \R$ is measurable and $f : \R \rightarrow \R$ is continuous, then $f(g) : E \rightarrow \R$ is measurable and
+            \begin{equation*}
+                (f(g))^{-1}((a, +\infty)) = g^{-1}(f^{-1}((a, +\infty)))
+            \end{equation*}
+        \end{theorem}
+
+        \begin{definition}[Borel Set on Extended Real Numbers]
+            $\mathscr{B}(\overline{\R}) := \{E \subseteq \R : E \cap \R \in \mathscr{B}(\R)\}$.
+        \end{definition}
+
+        \subsection{Convergence}
+        \begin{definition}[Pointwise Convergence]
+            $f_n \rightarrow f$ pointwise if for $x_0 \in E$,
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} f_n(x_0) = f(x_0).
+            \end{equation*}
+        \end{definition}
+
+        \begin{definition}[Uniformly Convergence]
+            $f_n \rightarrow f$ uniformly if
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \sup_{x \in E} |f_n(x) - f(x)| = 0.
+            \end{equation*}
+        \end{definition}
+
+        \begin{definition}[Almost Everywhere Convergence]
+            $f_n \rightarrow f$ almost everywhere (a.e.) if $f_n \rightarrow f$ pointwise in $E \backslash E_0$ where $\mu(E_0) = 0$.
+        \end{definition}
+
+        \begin{definition}[Convergence in Measure]
+            Let $(X, \mathcal{M}, \mu)$ be a measure space and $f_n, f : E \rightarrow \R$ be measurable. Then $f_n \rightarrow f$ in measure if
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \mu(\{x \in E : |f_n(x) - f(x)| \geq \varepsilon\}) = 0.
+            \end{equation*}
+        \end{definition}
+        \begin{remark}
+            Note that the set above is the set containing the point at which $f_n$ is not convergent.
+        \end{remark}
+        \begin{remark}
+            It is not related to convergence almost everywhere.
+        \end{remark}
+
+        \begin{theorem}
+            Let $f_n$ be measurable and $\mu$ a complete measure. If $f_n \rightarrow f$ almost everywhere then $f$ is measurable.
+        \end{theorem}
+        \begin{corollary}
+            $f_n \rightarrow f$ pointwise implies $f$ is measurable.
+        \end{corollary}
+        
+        \subsection{Presentation Question}
+        \begin{question}
+            Let $f, g : E \rightarrow \overline{\R}$ be measurable, and $E_0 = \{x \in E : f(x) = g(x) = \pm\infty\}$. Show that
+            \begin{equation*}
+                h(x) = \begin{cases}
+                    f(x) - g(x) & x \in E \backslash E_0 \\
+                    1 & x \in E_0
+                \end{cases},
+            \end{equation*}
+            is measurable.
+        \end{question}
+
+        \begin{proof}
+            Since $f, g$ are measurable, $h(x)$ is measurable on $E \backslash E_0$, and we also have
+            \begin{equation*}
+                f^{-1}(\{\pm \infty\}), g^{-1}(\{\pm\infty\}) \in \mathcal{M} \implies E_0 = f^{-1}(\{\pm \infty\}) \cap g^{-1}(\{\pm\infty\}) \in \mathcal{M}.
+            \end{equation*}
+            So $h^{-1}(h(E_0)) = E_0 \in \mathcal{M}$. $h$ is measurable on $E_0$. Therfore, $h$ is measurable.
+        \end{proof}
+
+
+    \section{Convergence in Measure, Egoroff’s Theorem, Lusin’s Theorem}
+        \subsection{Convergence in Measure}
+        
+        
+        \subsection{Presentation Question}
+        \begin{question}
+            
+        \end{question}
+        \begin{proof}
+            
+        \end{proof}
+\end{document}
