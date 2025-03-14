@@ -17,6 +17,7 @@
                 \item $f^{-1}((-\infty, a)) \in \mathcal{M}$ for any $a \in \R$;
                 \item $f^{-1}((a, b)) \in \mathcal{M}$ for any $a, b \in \R$;
                 \item $f^{-1}([a, b]) \in \mathcal{M}$ for any $a, b \in \R$;
+                \item $f^{-1}(O) \in \mathcal{M}$, for any open set $O \subseteq \R$;
                 \item $f^{-1}(B) \in \mathcal{M}$, for any Borel set $B \subseteq \R$.
             \end{enumerate}
         \end{theorem}
@@ -37,6 +38,12 @@
         \begin{corollary}
             If $f$ is measurable, $f^{-1}$ is measurable.
         \end{corollary}
+        \begin{corollary}
+            If $f : E \rightarrow \R$ is measurable, then $f^{-1}(a) = \{x \in E : f(x) = a\}$ is measurable.
+        \end{corollary}
+        \begin{remark}
+            The converse is not true. $f^{-1}(a) = \{x \in E : f(x) = a\}$ is measurable does not imply $f$ is measurable.
+        \end{remark}
 
         \begin{theorem}
             The indicator function is measurable if and only if the set $E$ is measurable.
@@ -51,7 +58,7 @@
         \end{theorem}
 
         \begin{theorem}
-            If $f, g$ are measurable, $af + bg$, $f \cdot g$ and $\frac{f}{g} \; (g \neq 0)$ are measurable.
+            If $f, g$ are measurable, $af + bg$, $f \cdot g$ and $\frac{f}{g} \; (g \neq 0)$ are measurable. $\max\{f, g\}, \min\{f, g\}$ and $|f|$ is also measurable.
         \end{theorem}
 
         \begin{theorem}
@@ -72,17 +79,26 @@
                 \lim_{n \rightarrow \infty} f_n(x_0) = f(x_0).
             \end{equation*}
         \end{definition}
+        \begin{remark}
+            Let $E_n(\varepsilon) = \{x : |f_n(x) - f(x)| \geq \varepsilon\}$. Then converging pointwise is equivalent to $\varlimsup_{n \rightarrow \infty} E_n(\varepsilon) = \emptyset$.
+        \end{remark}
 
-        \begin{definition}[Uniformly Convergence]
+        \begin{definition}[Uniform Convergence]
             $f_n \rightarrow f$ uniformly if
             \begin{equation*}
                 \lim_{n \rightarrow \infty} \sup_{x \in E} |f_n(x) - f(x)| = 0.
             \end{equation*}
         \end{definition}
+        \begin{remark}
+            Converging uniformly is equivalent to for any $\varepsilon > 0$, there exists $N$ such that when $n > N$, $E_n(\varepsilon) = \emptyset$.
+        \end{remark}
 
         \begin{definition}[Almost Everywhere Convergence]
             $f_n \rightarrow f$ almost everywhere (a.e.) if $f_n \rightarrow f$ pointwise in $E \backslash E_0$ where $\mu(E_0) = 0$.
         \end{definition}
+        \begin{remark}
+            Almost everywhere convergence is equivalent to any $\varepsilon > 0$, $\mu(\varlimsup_{n \rightarrow \infty} E_n(\varepsilon) = 0$.
+        \end{remark}
 
         \begin{definition}[Convergence in Measure]
             Let $(X, \mathcal{M}, \mu)$ be a measure space and $f_n, f : E \rightarrow \R$ be measurable. Then $f_n \rightarrow f$ in measure if
@@ -126,14 +142,122 @@
 
 
     \section{Convergence in Measure, Egoroff’s Theorem, Lusin’s Theorem}
-        \subsection{Convergence in Measure}
-        
-        
+        \subsection{Convergence}
+        \begin{theorem}
+            If $f_n \rightarrow f$ in measure on $E$, then there is a subsequence $f_{n_k} \rightarrow f$ almost everywhere.
+        \end{theorem}
+        \begin{proof}
+            $f_n \rightarrow f$ in measure. This implies
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \mu\left(E_n\left(\frac{1}{k}\right)\right) = 0 \implies \mu\left(E_{n_k}\left(\frac{1}{k}\right)\right) < \frac{1}{2^k}.
+            \end{equation*}
+            Then
+            \begin{equation*}
+                \sum^{\infty}_{k = 1} \mu\left(E_{n_k}\left(\frac{1}{k}\right)\right) < 1.
+            \end{equation*}
+            By Borel-Cantelli Lemma, we have
+            \begin{align*}
+                \implies \mu\left(\varlimsup_{k \rightarrow \infty} E_{n_k}\left(\frac{1}{k}\right)\right) &= 0 \\
+                \implies f_{n_k}(x) &\rightarrow f(x) \quad a.e.
+            \end{align*}
+        \end{proof}
+
+        \begin{theorem}
+            If $f_n \rightarrow f$ almost everywhere and $\mu(E) < \infty$, then $f_n \rightarrow f$ in measure.
+        \end{theorem}
+        \begin{proof}
+            Suppose it is pointwise convergent. Then
+            \begin{align*}
+                \varlimsup_{n \rightarrow \infty} E_n(\varepsilon) &= \emptyset. \\
+                \implies \mu\left(\varlimsup_{n \rightarrow \infty} E_n(\varepsilon)\right) &= 0.
+            \end{align*}
+            If $\mu(E) < \infty$, then
+            \begin{equation*}
+                \varlimsup_{n \rightarrow \infty} \mu( E_n(\varepsilon)) \leq \mu\left(\varlimsup_{n \rightarrow \infty} E_n(\varepsilon)\right) = 0.
+            \end{equation*}
+        \end{proof}
+
+        \begin{theorem}[Egroff's Theorem]
+            Suppose $\mu(E) < \infty$, and $f_n \rightarrow f$ almost everywhere. Then for any $\varepsilon$ there is a measurable set $F \subseteq E$ s.t. $\mu(E \backslash F) < \varepsilon$ and $f_n \rightarrow f$ uniformly on $F$.
+        \end{theorem}
+        \begin{proof}
+            Observe that
+            \begin{align*}
+                \varlimsup_{n \rightarrow \infty} E_n(\varepsilon) &= \emptyset \\
+                \bigcap^{\infty}_{n = 1} \bigcup^{\infty}_{m = n} E_m(\varepsilon) &= \emptyset \\
+                E'_n(\varepsilon) &= \bigcup^{\infty}_{m = n} E_m(\varepsilon) \rightarrow \emptyset \\
+                \mu(E'_n(\varepsilon)) &\rightarrow 0 \\
+                \mu\left(E'_{n_k}\left(\frac{1}{k}\right)\right) &< \frac{\varepsilon}{2^k}, \quad k \in \N.
+            \end{align*}
+            This implies the ``bad points" vanish as $n \rightarrow \infty$. It follows that
+            \begin{align*}
+                F' &= \bigcup^{\infty}_{k = 1} E'_{n_k}\left(\frac{1}{k}\right) \quad F = E \backslash F' \\
+                F &= \bigcap^{\infty}_{k = 1} \left(E \backslash E'_{n_k}\left(\frac{1}{k}\right)\right) = \bigcap^{\infty}_{k = 1} \bigcap^{\infty}_{n = n_k} \left\{x \in E : |f_n(x) - f| < \frac{1}{k}\right\}.
+            \end{align*}
+            Define
+            \begin{align*}
+                f_n(x) = \begin{cases}
+                    1 & x \in I_n \\
+                    0 & x \in [0, 1] \backslash I_n
+                \end{cases}
+            \end{align*}
+            For $x \in F$, $|f_n(x) - f(x)| < \frac{1}{k}$ where $n \geq n_k, k \in \N$.
+        \end{proof}
+
+        \begin{theorem}[Lusin's Theorem]
+            Let $f : E \rightarrow \R$ be a Lebesgue measurable function. For every $\varepsilon > 0$, there is a closed set $F \subseteq E$ such that $m(E \backslash F) < \varepsilon$ and $f|_F : F \rightarrow \R$ is continuous.
+        \end{theorem}
+
+        \begin{theorem}[Lusin's Theorem (Reformulation)]
+            Let $f : E \rightarrow \R$ be a Lebesgue measurable function. For every $\varepsilon > 0$, there is a continuous function $g : \R \rightarrow \R$ and a closed set $F \subseteq E$ such that $f = g$ on $F$ and $m(E \backslash F) < \varepsilon$.
+        \end{theorem}
+
+        \subsection{Simple Function}
+        \begin{definition}[Simple Function]
+            A function $\phi : E \rightarrow \R$ is a simple function if it takes finitely many values.
+        \end{definition}
+
+        \begin{theorem}[Simple Function Approximation]
+            If $f : E \rightarrow [0, \infty]$ is measurable, then there is a sequence $\{\psi_n\}$ of simple functions on $E$ such that
+            \begin{enumerate}
+                \item $0 \leq \psi_1 \leq \psi_2 \leq \cdots \leq f$ and $\psi_n \rightarrow f$ pointwise on $E$;
+                \item $\psi_n \rightarrow f$ uniformly on any subset of $E$ on which $f$ is bounded.
+            \end{enumerate}
+        \end{theorem}
+
+        \begin{theorem}
+            If $f : E \rightarrow \R$ is a measurable function, then there exists a sequence $\{\psi_n\}$ of simple functions on $E$ so that
+            \begin{enumerate}
+                \item $0 \leq |\varphi_1| \leq |\varphi_2| \leq \cdots \leq |f|$, and $\varphi_n \rightarrow f$ pointwise on $E$;
+                \item $\varphi_n \rightarrow f$ uniformly on any subset of $E$ on which $f$ is bounded.
+            \end{enumerate}
+        \end{theorem}
+
         \subsection{Presentation Question}
         \begin{question}
-            
+            Let $f_n$ and $f$ be measurable on $E$. Show that there exists $f_n \rightarrow f$ pointwise if and ony if for any $\varepsilon > 0$,
+            \begin{equation*}
+                \varlimsup_{n \rightarrow \infty} E_n(\varepsilon) = \emptyset.
+            \end{equation*}
         \end{question}
         \begin{proof}
-            
+            \textit{Proof of Sufficiency.} Suppose there exists a sequence $f_n \rightarrow f$ pointwise. By definition, for any $\varepsilon > 0$, for any $x_0 \in E$ there exists some integer $N > 0$ such that for all $n > N$
+            \begin{equation*}
+                |f_n(x_0) - f(x_0)| < \varepsilon \implies x_0 \notin E_n(\varepsilon).
+            \end{equation*}
+            So every $x \in E$ is in finitely many $E_n$, that is,
+            \begin{equation*}
+                 \varlimsup_{n \rightarrow \infty} E_n(\varepsilon) = \emptyset.
+            \end{equation*}
+
+            \noindent \textit{Proof of Necessity.} Suppose for any $\varepsilon > 0$,
+            \begin{equation*}
+                 \varlimsup_{n \rightarrow \infty} E_n(\varepsilon) = \emptyset.
+            \end{equation*}
+            This implies every $x \in E$ is in finitely many $E_n$. So for any $\varepsilon > 0$, for each $x_0 \in E$ there exists positive integer $N$ such that for all $n > N$
+            \begin{equation*}
+                |f_n(x_0) - f(x_0)| < \varepsilon \implies \lim_{n \rightarrow \infty} f_n(x_0) = f(x_0).
+            \end{equation*}
+            Thus, $f_n \rightarrow f$ pointwise.
         \end{proof}
 \end{document}
