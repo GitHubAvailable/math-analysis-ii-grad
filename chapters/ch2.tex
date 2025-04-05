@@ -169,10 +169,10 @@
         \begin{proof}
             Let $S_A := \bigcup^{\infty}_{i = 1} A_i, S_B := \bigcup^{\infty}_{i = 1} B_i$ be the union covers of sets $A, B \subseteq X$, respectively. Suppose $d(A, B) > 0$. Let $S_{A \cup B} := \bigcup^{\infty}_{i = 1} C_i$ be a cover of $A \cup B$. Without loss of generality, assume each $C_i \cap (A \cup B) \neq \emptyset$. Notice that when $\delta < \frac{1}{3} d(A, B)$, for any $i \in \Z^+$, at least one of $C_i \cap A$ and $C_i \cap B$ must be empty. So $\{C_i\}$ can be partitioned into $2$ disjoint covers such that $A \subseteq \bigcup^{\infty}_{j = 1} C_{i_j}$ and $B \subseteq \bigcup^{\infty}_{k = 1} C_{i_k}$, that is,
             \begin{align*}
-                \mu^*(A \cap B) &= \mu^*(A) + \mu^*(B) \\
-                H^p_{\delta}(A \cap B) &= H^p_{\delta}(A) + H^p_{\delta}(B) \\
-                \lim_{\delta \rightarrow 0} H^p_{\delta}(A \cap B) &= \lim_{\delta \rightarrow 0} H^p_{\delta}(A) + \lim_{\delta \rightarrow 0} H^p_{\delta}(B) \\
-                H^p(A \cap B) &= H^p(A) + H^p(B).
+                \mu^*(A \cup B) &= \mu^*(A) + \mu^*(B) \\
+                H^p_{\delta}(A \cup B) &= H^p_{\delta}(A) + H^p_{\delta}(B) \\
+                \lim_{\delta \rightarrow 0} H^p_{\delta}(A \cup B) &= \lim_{\delta \rightarrow 0} H^p_{\delta}(A) + \lim_{\delta \rightarrow 0} H^p_{\delta}(B) \\
+                H^p(A \cup B) &= H^p(A) + H^p(B).
             \end{align*}
             So $H^p$ is a metric outer measure.
         \end{proof}

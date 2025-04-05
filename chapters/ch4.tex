@@ -5,13 +5,110 @@
 
 \begin{document}
     \section{Lebesgue Integration, Bounded Convergence Theorem}
+        \subsection{Lebesgue Integration}
+        \begin{definition}[Lebesgue Integration for a Simple Function]
+            Let $\phi := \sum^{\infty}_{i = 1} c_i \mathbf{1}_{E_i}$ be a simple function in standard form. Define
+            \begin{equation*}
+                \int_{E} \phi dx = \sum^{n}_{i = 1} c_i \mu(E_i).
+            \end{equation*}
+        \end{definition}
+        
+        \begin{theorem}
+            $\int_E (a\phi + b\psi) d\mu = a \int_E \phi d\mu + b \int_E \psi d\mu$.
+        \end{theorem}
+        \begin{theorem}
+            If $\phi \leq \psi$, $\int_E \phi d\mu \leq\int_E \psi d\mu$.
+        \end{theorem}
+        
+        \begin{theorem}
+            If $E_1 \cap E_2 = \emptyset$, $\int_{E_1} \phi d\mu \leq\int_{E_2} \phi d\mu$.
+        \end{theorem}
+
+        \begin{definition}[Upper and Lower Integral]
+            Let $f : E \rightarrow \R$ be bounded and $\mu(E) < \infty$. Define
+            \begin{align*}
+                \overline{\int_E} f d\mu = \inf\left\{\int_E \psi d\mu : f \leq \psi, \psi \;\text{is simple}\right\}, \\
+                \underline{\int_E} f d\mu = \sup\left\{\int_E \phi d\mu : \phi \leq f, \phi \;\text{is simple}\right\}.
+            \end{align*}
+        \end{definition}
+
+        \begin{definition}[Lebesgue Integral]
+            If $\overline{\int_E} f d\mu = \underline{\int_E} f d\mu$, $f$ is called integrable with respect to $\mu$. Denoted by $\int_E f d\mu$.
+        \end{definition}
+
+        \begin{definition}
+            Riemann integrable implies Lebesgue integrable, but not vice versa.
+        \end{definition}
+
+        \begin{theorem}
+            Suppose $f : E \rightarrow \R$ is bounded and $\mu(E) < \infty$. If $f$ is measurable, then $f$ is integrable.
+        \end{theorem}
+
+        \subsection{Bounded Convergence Theorem}
+        \begin{theorem}[Bounded Convergence Theorem]
+            Let $\{f_n\}$ be a sequence of measurable functions on a set of finite measure $E$. Suppose $\{f_n\}$ is uniformly pointwise bounded on $E$, that is, there is a number $M \geq 0$ for which $|f_n| \leq M$ on $E$ for all $n$. If $\{f_n\} \rightarrow f$ pointwise on $E$, then
+            \begin{align*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu = \int_E f d\mu.
+            \end{align*}
+        \end{theorem}
+        
         \subsection{Presentation Question}
         \begin{question}
-            
+            Suppose $f, g: E \rightarrow \R$ are bounded measurable and $\mu(E) < \infty$. Prove
+            \begin{equation*}
+                \int_{E} (af + bg) d\mu = a\int_{E} f d\mu + b \int_{E} g d\mu.
+            \end{equation*}
         \end{question}
 
         \begin{proof}
-            
+            First we show that $\forall a \in \R$,
+            \begin{equation*}
+                \int_E af d\mu = a \int_E f d\mu.
+            \end{equation*}
+            Observe that $af$ is Lebesgue integrable as it is measurable and bounded. Let $\psi$ be a simple function. For $a > 0$, 
+            \begin{equation*}
+                \int_E af d\mu = \inf_{\psi \geq af} \int_E \psi d\mu = a \inf_{\psi / a \geq f} \int_{E} \frac{\psi}{a} d\mu = a \int_E f d\mu.
+            \end{equation*}
+            For $a < 0$,
+            \begin{equation*}
+                \int_E af d\mu = \inf_{\psi \geq af} \int_E \psi d\mu = a \sup_{\psi / a \leq f} \int_{E} \frac{\psi}{a} d\mu = a \int_E f d\mu.
+            \end{equation*}
+            For $a = 0$,
+            \begin{equation*}
+                \int_E af d\mu = 0 = 0 \int_E f d\mu.
+            \end{equation*}
+            Let $\psi_1, \psi_2$ be simple functions. Suppose $f \leq \psi_1$ and $g \leq \psi_2$. It follows that for any $\psi_1, \psi_2$,
+            \begin{align*}
+                \int_E (f + g) d\mu \leq \int_E \psi_1 + \psi_2 d\mu &= \int_E \psi_1 d\mu + \int_E \psi_2 d\mu \\
+                \implies \int_E (f + g) d\mu &\leq \int_E f d\mu + \int_E g d\mu.
+            \end{align*}
+            Let $\phi_1, \phi_2$ be simple functions. Suppose $f \geq \phi_1$ and $g \geq \phi_2$. By similar logic, for any $\phi_1, \phi_2$,
+            \begin{equation*}
+                \int_E (f + g) d\mu \geq \int_E f d\mu + \int_E g d\mu.
+            \end{equation*}
+            Combining the two arguments, we get
+            \begin{equation*}
+                \int_E (f + g) d\mu = \int_E f d\mu + \int_E g d\mu.
+            \end{equation*}
+            Combining with scalar multiplicity gives get linearity.
+        \end{proof}
+
+        \begin{question}
+            Suppose $f: E \rightarrow \R$ is a bounded measurable function. If $E = A \cup B$ is a disjoint union of measurable $A$ and $B$, show
+            \begin{equation*}
+                \int_{E} f d\mu = \int_{A} f d\mu + \int_{B} f d\mu.
+            \end{equation*}
+        \end{question}
+
+        \begin{proof}
+            Since $A, B$ are disjoint,
+            \begin{equation*}
+                f = f \cdot \mathbf{1}_A + f \cdot \mathbf{1}_b.
+            \end{equation*}
+            By linearity of integration,
+            \begin{align*}
+                \int_E f d\mu = \int_E f \cdot \mathbf{1}_A d\mu + \int_E f \cdot \mathbf{1}_B d\mu = \int_A f d\mu + \int_B f d\mu.
+            \end{align*}
         \end{proof}
 
 
