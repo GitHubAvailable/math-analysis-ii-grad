@@ -36,21 +36,41 @@
             If $\overline{\int_E} f d\mu = \underline{\int_E} f d\mu$, $f$ is called integrable with respect to $\mu$. Denoted by $\int_E f d\mu$.
         \end{definition}
 
-        \begin{definition}
-            Riemann integrable implies Lebesgue integrable, but not vice versa.
-        \end{definition}
+        \begin{theorem}[Lebesgue Theorem]
+            A bounded function $f : [a, b] \rightarrow \R$ is Riemann integrable if and only if its set of discontinuities has Lebesgue measure zero.
+        \end{theorem}
 
         \begin{theorem}
             Suppose $f : E \rightarrow \R$ is bounded and $\mu(E) < \infty$. If $f$ is measurable, then $f$ is integrable.
         \end{theorem}
 
+        \begin{theorem}
+            If $\{f_n\}$ is a sequence of measurable function converging to $f$ uniformly, then
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu = \lim_{n \rightarrow \infty} \int_E f d\mu.
+            \end{equation*}
+        \end{theorem}
+
         \subsection{Bounded Convergence Theorem}
         \begin{theorem}[Bounded Convergence Theorem]
-            Let $\{f_n\}$ be a sequence of measurable functions on a set of finite measure $E$. Suppose $\{f_n\}$ is uniformly pointwise bounded on $E$, that is, there is a number $M \geq 0$ for which $|f_n| \leq M$ on $E$ for all $n$. If $\{f_n\} \rightarrow f$ pointwise on $E$, then
+            Let $\{f_n\}$ be a sequence of measurable functions on a set of finite measure $E$. Suppose $\{f_n\}$ is uniformly bounded on $E$, that is, there is a number $M \geq 0$ for which $|f_n| \leq M$ on $E$ for all $n$. If $\{f_n\} \rightarrow f$ almost everywhere on $E$, then
             \begin{align*}
                 \lim_{n \rightarrow \infty} \int_E f_n d\mu = \int_E f d\mu.
             \end{align*}
         \end{theorem}
+        \begin{proof}
+            Since $\{f_n\}$ is uniformly bounded, we have $|f_n(x)| \leq M$ for all $n$ and $x \in E$ such that $\mu(E \backslash F) < \varepsilon$, and $f_n$ is uniformly convergent in $F$. Thus,
+            \begin{equation*}
+                |f_n(x) - f(x)| < \varepsilon, x \in F, n > N.
+            \end{equation*}
+            We have
+            \begin{align*}
+                \left|\int_E f_n d\mu - \int_E d\mu\right| &= \left|\int_E (f_n - f) d\mu\right| \\
+                &= \left|\int_F (f_n - f) + \int_{E \backslash F} (f_n - f) d\mu\right| \\
+                &= \int_F |f_n - f| d\mu + \int_{E \backslash F} |f_n - f| d\mu \\
+                &\leq \varepsilon \mu(E) + 2M\varepsilon = (\mu(E) + 2M)\varepsilon.
+            \end{align*}
+        \end{proof}
         
         \subsection{Presentation Question}
         \begin{question}
@@ -113,16 +133,209 @@
 
 
     \section{Integration in General Measure Space}
+        \subsection{Integration of Nonnegative Functions}
+        \begin{definition}[Value of Lebesgue Integral]
+            For measurable function $f : E \rightarrow [0, \infty)$, the value of its Lebesgue integral is
+            \begin{equation*}
+                \int_E f d\mu = \sup\{\int_E \phi d\mu : 0 \leq \phi \leq f, \phi \;\text{is simple}\}.
+            \end{equation*}
+        \end{definition}
+        \begin{remark}
+            The codomain can be $[0, \infty]$.
+        \end{remark}
+
+        \begin{theorem}
+            If $\mu(E) = 0$, then $\int_E f d\mu = 0$.
+        \end{theorem}
+
+        \begin{theorem}[Monotone Convergence Theorem]
+            If $\{f_n\}$ is an increasing sequence of monotonic measurable functions that converges to $f$ pointwise on $E$, then
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu = \int_E f d\mu.
+            \end{equation*}
+        \end{theorem}
+        \begin{remark}
+            The result of the integral may not be finite.
+        \end{remark}
+        \begin{proof}
+            We have $0 \leq f_1(x) \leq f_2(x) \leq \cdots \leq f_n(x) \cdots \leq f(x)$ and
+            \begin{equation*}
+                \int_E f_n d\mu \leq \int_E f d\mu.
+            \end{equation*}
+            Thus,
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu \leq \int_E f d\mu.
+            \end{equation*}
+            We need to show the reverse inequality
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu \geq \int_E f d\mu = \sup\left\{\int_E \phi d\mu : 0 \leq \phi \leq f, \phi \;\text{is simple}\right\}.
+            \end{equation*}
+            We show that
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu \geq \alpha \int_E \phi d\mu, \quad 0 < \alpha < 1.
+            \end{equation*}
+            Let $E_n = \{x \in E : f_n(x) \geq \alpha \phi(x)\}$. We have $E_1 \subseteq E_2 \subseteq \cdots \subseteq E_n \subseteq \cdots$
+            \begin{equation*}
+                \bigcup^{\infty}_{n = 1} E_n = E.
+            \end{equation*}
+            Let $\phi = \sum_{i} a_i \mathbf{1}_{F_i}$. We have
+            \begin{align*}
+                \int_E f_n(x) d\mu &\geq \int_{E_n} f_n(x) d\mu \geq \int_{E_n} \alpha \phi(x) d\mu \\
+                &= \int_{E_n} \sum_{i} a_i \mathbf{1}_{F_i}(x) d\mu(x) \\
+                &= \alpha\sum_{i} a_i \mu(F_i \cap E_n) \rightarrow \alpha \sum_{i} a_i \mu(F_i \cap E) \\
+                &= \alpha \int_E \phi(x) d\mu(x).
+            \end{align*}
+            This shows $\lim_{n \rightarrow \infty} \int_E f_n d\mu \geq \alpha \int_E \phi d\mu$.
+        \end{proof}
+        \begin{remark}
+            The theorem does not always hold for decreasing sequence.
+        \end{remark}
+
+        \begin{theorem}[Term-by-Term Integration]
+            If $f_n(x) \geq 0$ are measurable and $f(x) = \sum^{\infty}_{n = 1} f_n(x)$ is convergent pointwise, then
+            \begin{equation*}
+                \int_E f(x) d\mu(x) = \sum^{\infty}_{n = 1} \int_E f_n(x) d\mu(x).
+            \end{equation*}
+        \end{theorem}
+        
         \subsection{Presentation Question}
         \begin{question}
-            
+            Show that monotone convergence theorem does not hold for decreasing sequences.
         \end{question}
         \begin{proof}
-            
+            Let $E = [0, 1]$. Define
+            \begin{equation*}
+                f_n := \begin{cases}
+                    \frac{1}{nx} & x \neq 0 \\
+                    0 & x = 0
+                \end{cases}, \quad f := 0,  \forall x \in E
+            \end{equation*}
+            $\{f_n\}$ is decreasing and $f_n \rightarrow f$ pointwise almost everywhere. However, under Lebesgue measure
+            \begin{align*}
+                \lim_{n \rightarrow \infty} \int_E f_n dx &= \lim_{n \rightarrow \infty} \int_E \frac{1}{nx} dx \\
+                &= \lim_{n \rightarrow \infty} \frac{1}{n} \ln{x}\bigg|^{1}_{0} \\
+                &= +\infty \neq 0 = \int_E f dx.
+            \end{align*}
+        \end{proof}
+
+        \begin{question}
+            Let $\{f_n\}$ be a decreasing sequence of non-negative measurable functions so that $f_n \rightarrow f$ pointwise. If $\int_E f_1 d\mu < \infty$, show that
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu = \int_E f d\mu.
+            \end{equation*}
+        \end{question}
+        \begin{proof}
+            Since $\{f_n\}$ is decreasing and non-negative, for any integer $k \geq 2$,
+            \begin{equation*}
+                \sup|f_{k}| \leq \sup|f_{k - 1}| \leq \cdots \leq \sup|f_{2}| \leq \inf|f_1| < +\infty.
+            \end{equation*}
+            So $\{f_2, f_3, \dots\}$ are uniformly bounded and are Lebesgue integrable on any sets with finite measure. By monotonicity,
+            \begin{equation*}
+                +\infty > \int_{E} f_1 d\mu \geq \int_E f_2 d\mu \geq \cdots \geq \int_E f d\mu
+            \end{equation*}
+            So $f_n$ and $f$ are integrable.
+
+            \noindent To show the limit as $n \rightarrow \infty$, Define $g_n := f_1 - f_n$. Notice that $\{g_n\}$ is nonnegative measurable since for any $n \in \N^{+}$,
+            \begin{align*}
+                f_n \geq f_{n + 1} \implies g_n = f_1 - f_n \leq f_1 - f_{n + 1} = g_{n + 1}.
+            \end{align*}
+            As $f_n \rightarrow f$ pointwise, $g_n \rightarrow f_1 - f$ pointwise. By monotone convergence theorem,
+            \begin{align*}
+                \lim_{n \rightarrow \infty} \int_E g_n d\mu &= \int_E f_1 - f d\mu \\
+                \int_E f_1 d\mu - \lim_{n \rightarrow \infty} \int_E f_n d\mu = \lim_{n \rightarrow \infty} \int_E g_n d\mu &= \int_E f_1 - f d\mu = \int_E f_1 d\mu - \int_{E} f d\mu \\
+                \implies \lim_{n \rightarrow \infty} \int_E f_n d\mu &= \int_{E} f d\mu.
+            \end{align*}
         \end{proof}
 
 
     \section{Fatou’s Lemma, Monotone and Dominated Convergence Theorem}
+        \subsection{Convergence Theorems}
+        \begin{theorem}[Fatou's Lemma]
+            If $\{f_n\}$ is a sequnce of nonnegative measurable functions on $E$, then
+            \begin{equation*}
+                \int_E \varliminf_{n \rightarrow \infty} f_n d\mu \leq \varliminf_{n \rightarrow \infty} \int_E f_n d\mu.
+            \end{equation*}
+        \end{theorem}
+        \begin{corollary}
+            If measurable $f_n \rightarrow f$ pointwise on $E$ and $\int_E |f_n| d\mu \leq C$ then $\int_E f_n d\mu \leq C$.
+        \end{corollary}
+        
+        \begin{theorem}
+            If $f(x) \geq 0$ is measurable, then $\int_E f d\mu = 0$ if and only if $f(x) = 0$ a.e. in $E$.
+        \end{theorem}
+
+        \begin{definition}
+            Let $f : E \rightarrow \R$ be a measurable function. $f = f^+ + f^-$, where $f^+$ is the positive part and $f^- \geq 0$ is the negative part. Assume that at least one of $\int_E f^+ d\mu$ and $\int_E f^- d\mu$ is finite. Define
+            \begin{equation*}
+                \int_E f d\mu = \int_E f^+ d\mu + \int_E f^- d\mu.
+            \end{equation*}
+        \end{definition}
+
+        \begin{definition}
+            $f$ is called integrable if both $\int_E f^+ d\mu$ and $\int_E f^- d\mu$ are finite, which is equivalent to $\int_E |f| d\mu < \infty$. It is called $L^1$ function.
+        \end{definition}
+        \begin{remark}
+            Note that $f$ can be extended function.
+        \end{remark}
+
+        \begin{theorem}[Dominated Convergence Theorem]
+            Let $f$ be a sequence of $L^1$ functions satisfying
+            \begin{enumerate}
+                \item $f_n \rightarrow f$ pointwise a.e. on $E$;
+                \item $|f_n| < g$ for an $L^1$ function $g$.
+            \end{enumerate}
+            Then $f$ is $L^1$ and
+            \begin{equation*}
+                \lim_{n \rightarrow \infty} \int_E f_n d\mu = \int_E f d\mu.
+            \end{equation*}
+        \end{theorem}
+
+        \begin{theorem}
+            If $f, g$ are integrable on $X$, then $\int_E f d\mu = \int_E g d\mu$ for all $E \in \mathscr{M}$ if and only if $f = g$.
+        \end{theorem}
+
+        \subsection{Lebesgue-Stieltjies Integrals}
+        \begin{definition}
+            Let $F$ be an right continuous function on $\R$ and $\mu_F$ be the Lebesgue-Stieltjes measure. If $f$ is $\mu_F$ integrable, define the Lebesgue-Stieltjes integral of $f$ respect to $f$ by
+            \begin{equation*}
+                \int^b_a f(x) dF(x) = \int_{(a, b]} f(x) d\mu(x).
+            \end{equation*}
+        \end{definition}
+
+        \begin{definition}[Absolute Continuity]
+            For any $\varepsilon > 0$, there exists $\delta > 0$ such that for any disjoint open intervals (finitely or countably many) $(a_i, b_i) \subseteq [a, b]$ with $\sum_i (b_i - a_i) < \delta$,
+            \begin{equation*}
+                \sum_i |F(b) - F(a)| < \varepsilon.
+            \end{equation*}
+        \end{definition}
+        \begin{remark}
+            Bounded derivative implies Lipschitz continuous, which implies absolutely continuous. Bounded derivative also implies $F'(x)$ exists almost everywhere and is integrable.
+        \end{remark}
+        \begin{remark}
+            $F(x)$ is Absolutely continuous if and only if
+            \begin{equation*}
+                F(x) - F(a) = \int^x_a F'(x) dx.
+            \end{equation*}
+        \end{remark}
+
+        \begin{theorem}
+            If $F$ is absolutely continuous on $[a, b]$, then
+            \begin{equation*}
+                \int^b_a f dF = \int^b_a f(x) F'(x) dx.
+            \end{equation*}
+        \end{theorem}
+
+        \begin{theorem}[Integration by Parts]
+            Let $F, G$ be increasing and right continuous on $\R$. Then
+            \begin{equation*}
+                \int^b_a G dF = F(x) G(x) \bigg|^b_a - \int^b_a F dG.
+            \end{equation*}
+        \end{theorem}
+        
+        \begin{remark}
+            Riemann-Stieltjies integrable implies Lebesgue-Stieltjies integrable.
+        \end{remark}
+        
         \subsection{Presentation Question}
         \begin{question}
             
